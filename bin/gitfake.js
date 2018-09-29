@@ -34,7 +34,7 @@ class Command {
     now () {
         let userEmail  = GitEmail.getUserEmail();
         if (userEmail == undefined) {
-            GitEmail.error(`this project not exist git user email,you maybe try -add.`);
+            GitEmail.error(`this project not exist git user email,maybe need try --use or --choose.`);
         } else {
             console.log(`gitEmail:${userEmail}`);
         }
@@ -70,6 +70,9 @@ class Command {
     }
 
     choose () {
+        if (this.userConfig.userEmailList.length<=0) {
+            GitEmail.error(`Not have vailed email!Maybe need try --use or --insert`);
+        }
         inquirer.prompt({
         type: 'list',
         name: 'theme',
