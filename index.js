@@ -1,9 +1,7 @@
-const childProcess = require('child_process');
-const os = require('os');
 const path = require('path');
 const fs = require('fs');
 const ini = require('ini');
-module.exports = class GitUserName {
+module.exports = class GitEmail {
     static getConfigPath() {
         return path.join(__dirname,'.git/config')
     }
@@ -13,25 +11,25 @@ module.exports = class GitUserName {
     }
 
     static existsConfigPath() {
-        if(!fs.existsSync(GitUserName.getConfigPath())) {
-            GitUserName.error('this dir not exist .git/config file');
+        if(!fs.existsSync(GitEmail.getConfigPath())) {
+            GitEmail.error('this dir not exist .git/config file');
         }
     }
 
     static getConfig() {
-        GitUserName.existsConfigPath();
-        return ini.parse(fs.readFileSync(GitUserName.getConfigPath(),'utf-8'));
+        GitEmail.existsConfigPath();
+        return ini.parse(fs.readFileSync(GitEmail.getConfigPath(),'utf-8'));
     }
 
-    static getUserName () {
-        let config = GitUserName.getConfig();
-        if (config.user && config.user.name){return config.user.name;}
+    static getUserEmail () {
+        let config = GitEmail.getConfig();
+        if (config.user && config.user.email){return config.user.email;}
     }
 
-    static setUserName (userName) {
-        let config = GitUserName.getConfig();
+    static setUserEmail (userEmail) {
+        let config = GitEmail.getConfig();
         if (!config.user){config.user ={}}
-        config.user.name = userName;
-        fs.writeFileSync(GitUserName.getConfigPath(),ini.stringify(config));
+        config.user.email = userEmail;
+        fs.writeFileSync(GitEmail.getConfigPath(),ini.stringify(config));
     }
 }
