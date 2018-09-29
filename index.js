@@ -3,7 +3,7 @@ const fs = require('fs');
 const ini = require('ini');
 module.exports = class GitEmail {
     static getConfigPath() {
-        return path.join(__dirname,'.git/config')
+        return path.join(process.cwd(),'.git/config')
     }
 
     static error(msg){
