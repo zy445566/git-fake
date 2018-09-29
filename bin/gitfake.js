@@ -34,7 +34,7 @@ class Command {
     now () {
         let userEmail  = GitEmail.getUserEmail();
         if (userEmail == undefined) {
-            GitEmail.error(`this project not exist git user name`);
+            GitEmail.error(`this project not exist git user email,you maybe try -add.`);
         } else {
             console.log(`gitEmail:${userEmail}`);
         }
